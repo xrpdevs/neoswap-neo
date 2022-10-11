@@ -1,7 +1,7 @@
 {
   "name": "@uniswap/interface",
   "description": "Uniswap Interface",
-  "homepage": ".",
+  "homepage": "http://.",
   "private": true,
   "devDependencies": {
     "@ethersproject/experimental": "^5.0.1",
@@ -106,6 +106,12 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "neoswap-sdk": "^1.0.5",
+    "tsc": "^2.0.4"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": ""
     "typescript": "^3.9.3"
   }
 }
