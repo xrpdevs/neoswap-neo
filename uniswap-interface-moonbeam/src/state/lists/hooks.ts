@@ -1,4 +1,4 @@
-import { ChainId, Token } from 'moonbeamswap'
+import { ChainId, Token } from 'neoswap-sdk'
 import { Tags, TokenInfo, TokenList } from '@uniswap/token-lists'
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
@@ -35,7 +35,10 @@ const EMPTY_LIST: TokenAddressMap = {
   [ChainId.STANDALONE]: {},
   [ChainId.MOONROCK]: {},
   [ChainId.MOONBASE]: {},
-  [ChainId.MOONSHADOW]: {}
+  [ChainId.MOONSHADOW]: {},
+  [ChainId.FLARE]: {},
+  [ChainId.COSTON]: {},
+  [ChainId.SONGBIRD]: {}
 }
 
 const listCache: WeakMap<TokenList, TokenAddressMap> | null =

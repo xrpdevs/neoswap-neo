@@ -5,7 +5,7 @@ import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
 import { ROUTER_ADDRESS } from '../constants'
-import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, DEV } from 'moonbeamswap'
+import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, DEV } from 'neoswap-sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 
 // returns the checksummed address if the address is valid, otherwise returns false
@@ -16,26 +16,32 @@ export function isAddress(value: any): string | false {
     return false
   }
 }
-/*
+
 const DEVSCAN_PREFIXES: { [chainId in ChainId]: string } = {
-  1: '',
-  1287: 'xxxxxxxxx',
+  1: 'songbird',
+  1287: 'll',
+  1281: 'll',
+  1286: 'll',
+  1288: 'll',
+  14: 'flare',
+  16: 'coston',
+  19: 'songbird'
 }
-*/
 
 export function getEtherscanLink(chainId: ChainId, data: string, type: 'transaction' | 'token' | 'address'): string {
-  //const prefix = `https://${DEVSCAN_PREFIXES[chainId] || DEVSCAN_PREFIXES[1]}etherscan.io`
-  const prefix = 'https://moonbase.moonscan.io'
+  const prefix = `https://${DEVSCAN_PREFIXES[chainId] || DEVSCAN_PREFIXES[1]}`
+
+  const postfix = '-explorer.flare.network'
   switch (type) {
     case 'transaction': {
-      return `${prefix}/tx/${data}`
+      return `${prefix}${postfix}/tx/${data}`
     }
     case 'token': {
-      return `${prefix}/token/${data}`
+      return `${prefix}${postfix}/token/${data}`
     }
     case 'address':
     default: {
-      return `${prefix}/address/${data}`
+      return `${prefix}${postfix}/address/${data}`
     }
   }
 }

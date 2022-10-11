@@ -1,4 +1,4 @@
-import { Trade, TradeType } from 'moonbeamswap'
+import { Trade, TradeType } from 'neoswap-sdk'
 import React, { useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { Field } from '../../state/swap/actions'

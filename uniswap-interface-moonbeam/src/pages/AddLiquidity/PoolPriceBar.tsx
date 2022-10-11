@@ -1,4 +1,4 @@
-import { Currency, Percent, Price } from 'moonbeamswap'
+import { Currency, Percent, Price } from 'neoswap-sdk'
 import React, { useContext } from 'react'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'

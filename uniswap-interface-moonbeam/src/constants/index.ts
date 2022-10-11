@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent, Token, WDEV } from 'moonbeamswap'
+import { ChainId, JSBI, Percent, Token, WETH } from 'neoswap-sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { routerv2 } from '../moonbase_address.json'
 
@@ -9,12 +9,25 @@ export const ROUTER_ADDRESS: { [key: string]: string } = {
   [ChainId.MOONROCK]: routerv2,
   [ChainId.MOONBASE]: routerv2,
   [ChainId.MOONSHADOW]: routerv2,
+  [ChainId.FLARE]: routerv2,
+  [ChainId.COSTON]: routerv2,
+  [ChainId.SONGBIRD]: routerv2
 }
 
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
+
+export const COOT = new Token(ChainId.SONGBIRD, '0xe4671844Fcb3cA9A80A1224B6f9A0A6c2Ba2a7d5', 18, 'COOT', 'Cootie Coin')
+export const SFT = new Token(ChainId.SONGBIRD, '0xeC7a99eDb6995F98C17b316CE230AC8BC21B9d3b', 18, 'SFT', 'SGBFTSO RT')
+export const CAND = new Token(
+  ChainId.SONGBIRD,
+  '0x70Ad7172EF0b131A1428D0c1F66457EB041f2176',
+  18,
+  'CAND',
+  'Canary Dollar'
+)
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
@@ -39,19 +52,22 @@ export const CRV = new Token(
 )
 export const ALPHA = new Token(ChainId.MAINNET, '0xa1faa113cbE53436Df28FF0aEe54275c13B40975', 18, 'ALPHA', 'AlphaToken')
 
-const WDEV_ONLY: ChainTokenList = {
-  [ChainId.MAINNET]: [WDEV[ChainId.MAINNET]],
-  [ChainId.STANDALONE]: [WDEV[ChainId.STANDALONE]],
-  [ChainId.MOONROCK]: [WDEV[ChainId.MOONROCK]],
-  [ChainId.MOONBASE]: [WDEV[ChainId.MOONBASE]],
-  [ChainId.MOONSHADOW]: [WDEV[ChainId.MOONSHADOW]],
+const WETH_ONLY: ChainTokenList = {
+  [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
+  [ChainId.STANDALONE]: [WETH[ChainId.STANDALONE]],
+  [ChainId.MOONROCK]: [WETH[ChainId.MOONROCK]],
+  [ChainId.MOONBASE]: [WETH[ChainId.MOONBASE]],
+  [ChainId.MOONSHADOW]: [WETH[ChainId.MOONSHADOW]],
+  [ChainId.FLARE]: [WETH[ChainId.FLARE]],
+  [ChainId.COSTON]: [WETH[ChainId.COSTON]],
+  [ChainId.SONGBIRD]: [WETH[ChainId.SONGBIRD]]
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  ...WDEV_ONLY,
+  ...WETH_ONLY,
   [ChainId.MAINNET]: [
-    ...WDEV_ONLY[ChainId.MAINNET],
+    ...WETH_ONLY[ChainId.MAINNET],
     DAI,
     USDC,
     USDT,
@@ -63,8 +79,11 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     BAC,
     FXS,
     CRV,
-    ALPHA,
+    ALPHA
   ],
+  [ChainId.FLARE]: [...WETH_ONLY[ChainId.FLARE], SFT, CAND, COOT],
+  [ChainId.COSTON]: [...WETH_ONLY[ChainId.COSTON], SFT, CAND, COOT],
+  [ChainId.SONGBIRD]: [...WETH_ONLY[ChainId.SONGBIRD], SFT, CAND, COOT]
 }
 
 /**
@@ -73,31 +92,38 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  */
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
   [ChainId.MAINNET]: {
-    [AMPL.address]: [DAI, WDEV[ChainId.MAINNET]],
-  },
+    [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
+  }
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  ...WDEV_ONLY,
-  [ChainId.MAINNET]: [...WDEV_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  ...WETH_ONLY,
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  [ChainId.FLARE]: [...WETH_ONLY[ChainId.FLARE], SFT, CAND, COOT],
+  [ChainId.COSTON]: [...WETH_ONLY[ChainId.COSTON], SFT, CAND, COOT],
+  [ChainId.SONGBIRD]: [...WETH_ONLY[ChainId.SONGBIRD], SFT, CAND, COOT]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  ...WDEV_ONLY,
-  [ChainId.MAINNET]: [...WDEV_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  ...WETH_ONLY,
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], DAI, USDC, USDT],
+  [ChainId.SONGBIRD]: [...WETH_ONLY[ChainId.SONGBIRD], SFT, CAND, COOT]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [
     [
       new Token(ChainId.MAINNET, '0x5d3a536E4D6DbD6114cc1Ead35777bAB948E3643', 8, 'cDAI', 'Compound Dai'),
-      new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin'),
+      new Token(ChainId.MAINNET, '0x39AA39c021dfbaE8faC545936693aC917d5E7563', 8, 'cUSDC', 'Compound USD Coin')
     ],
     [USDC, USDT],
-    [DAI, USDT],
+    [DAI, USDT]
   ],
+  [ChainId.SONGBIRD]: [
+      [WETH[19], SFT],
+  ]
 }
 
 export interface WalletInfo {
@@ -128,7 +154,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     iconName: 'metamask.png',
     description: 'Easy-to-use browser extension.',
     href: null,
-    color: '#E8831D',
+    color: '#E8831D'
   },
   WALLET_CONNECT: {
     connector: walletconnect,
@@ -137,7 +163,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
     href: null,
     color: '#4196FC',
-    mobile: true,
+    mobile: true
   } /*
   LATTICE: {
     connector: lattice,
@@ -182,7 +208,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     href: null,
     color: '#4A6C9B',
     mobile: true
-  }*/,
+  }*/
 }
 
 export const NetworkContextName = 'NETWORK'

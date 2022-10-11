@@ -1,18 +1,19 @@
 {
-  "name": "moonbeamswap",
+  "name": "neoswap-sdk",
   "license": "MIT",
-  "version": "1.0.4",
-  "description": "🛠 An example SDK for building applications on top of Uniswap in Moonbeam.",
+  "version": "1.0.5",
+  "description": "🛠 An example SDK for building applications on top of Uniswap in SGB/FLR.",
+  "author": "Jamie Prince <jamie@txt3.com>",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/PureStake/moonbeam",
   "keywords": [
     "uniswap",
-    "ethereum",
-    "moonbeam"
+    "songbird",
+    "flare",
+    "neoswap"
   ],
   "module": "dist/sdk.esm.js",
   "scripts": {
@@ -56,5 +57,8 @@
     "printWidth": 120,
     "semi": false,
     "singleQuote": true
+  },
+  "directories": {
+    "test": "test"
   }
 }

@@ -1,4 +1,4 @@
-import { ChainId } from 'moonbeamswap'
+import { ChainId } from 'neoswap-sdk'
 import MULTICALL_ABI from './abi.json'
 import { multicall } from '../../moonbase_address.json'
 
@@ -7,6 +7,9 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.STANDALONE]: '0xF8cef78E923919054037a1D03662bBD884fF4edf',
   [ChainId.MOONROCK]: multicall,
   [ChainId.MOONBASE]: multicall,
+  [ChainId.FLARE]: multicall,
+  [ChainId.COSTON]: multicall,
+  [ChainId.SONGBIRD]: multicall,
   [ChainId.MOONSHADOW]: multicall
 }
 
