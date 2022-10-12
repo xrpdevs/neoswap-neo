@@ -51,9 +51,9 @@ export function colors(darkTheme: boolean): Colors {
 
       // backgrounds / greys
       mainBg: "#01022e",
-      bg1: '#023E8A',
+      bg1: '#042045',
       bg2: '#0096C7',
-      bg3: '#03045E',
+      bg3: '#03152b',
       bg4: '#023E8A',
       bg5: '#0077B6',
 
@@ -62,11 +62,11 @@ export function colors(darkTheme: boolean): Colors {
       advancedBG: 'rgba(0,0,0,0.1)',
 
       //primary colors
-      primary1: '#032e66',
-      primary2: '#032e66',
-      primary3: '#032e66',
+      primary1: '#03152b',
+      primary2: '#03152b',
+      primary3: '#023E8A',
       primary4: '#376bad70',
-      primary5: '#032e66',
+      primary5: '#03152b',
 
       // color text
       primaryText1: '#48CAE4',
