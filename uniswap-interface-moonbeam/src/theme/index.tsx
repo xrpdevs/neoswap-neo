@@ -12,7 +12,7 @@ import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
 
 export * from './components'
-
+let isDarkTheme = true;
 const MEDIA_WIDTHS = {
   upToExtraSmall: 500,
   upToSmall: 600,
@@ -22,7 +22,7 @@ const MEDIA_WIDTHS = {
 
 const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } = Object.keys(MEDIA_WIDTHS).reduce(
   (accumulator, size) => {
-    ;(accumulator as any)[size] = (a: any, b: any, c: any) => css`
+    ; (accumulator as any)[size] = (a: any, b: any, c: any) => css`
       @media (max-width: ${(MEDIA_WIDTHS as any)[size]}px) {
         ${css(a, b, c)}
       }
@@ -35,73 +35,71 @@ const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } 
 const white = '#FFFFFF'
 const black = '#000000'
 
-export function colors(darkTheme:boolean): Colors {
-  if(darkTheme)
-  {
+export function colors(darkTheme: boolean): Colors {
+  if (darkTheme) {
     return {
       // base
       white,
       black,
-  
+
       // text
-      text1: '#FFFFFF',
-      text2: '#C3C5CB',
-      text3: '#6C7284',
-      text4: '#565A69',
-      text5: '#2C2F36',
-  
+      text1: '#CAF0F8',
+      text2: '#CAF0F8',
+      text3: '#CAF0F8',
+      text4: '#CAF0F8',
+      text5: '#CAF0F8',
+
       // backgrounds / greys
-      mainBg: "#CAF0F8",
-      bg1: '#212429',
-      bg2: '#2C2F36',
-      bg3: '#40444F',
-      bg4: '#565A69',
-      bg5: '#6C7284',
-  
+      mainBg: "#01022e",
+      bg1: '#023E8A',
+      bg2: '#0096C7',
+      bg3: '#03045E',
+      bg4: '#023E8A',
+      bg5: '#0077B6',
+
       //specialty colors
       modalBG: 'rgba(0,0,0,.425)',
       advancedBG: 'rgba(0,0,0,0.1)',
-  
+
       //primary colors
-      primary1: '#2172E5',
-      primary2: '#3680E7',
-      primary3: '#4D8FEA',
+      primary1: '#032e66',
+      primary2: '#032e66',
+      primary3: '#032e66',
       primary4: '#376bad70',
-      primary5: '#153d6f70',
-  
+      primary5: '#032e66',
+
       // color text
-      primaryText1: '#6da8ff',
-  
+      primaryText1: '#48CAE4',
+
       // secondary colors
       secondary1: '#2172E5',
       secondary2: '#17000b26',
       secondary3: '#17000b26',
-  
+
       // other
       red1: '#FF6871',
       red2: '#F82D3A',
       green1: '#27AE60',
       yellow1: '#FFE270',
       yellow2: '#F3841E'
-  
+
       // dont wanna forget these blue yet
       // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
       // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
     }
-  } else
-  {
+  } else {
     return {
       // base
       white,
       black,
-  
+
       // text
       text1: '#03045E',
       text2: '#03045E',
       text3: '#03045E',
       text4: '#03045E',
       text5: '#03045E',
-  
+
       // backgrounds / greys
       mainBg: "#CAF0F8",
       bg1: '#90E0EF',
@@ -109,33 +107,33 @@ export function colors(darkTheme:boolean): Colors {
       bg3: '#00B4D8',
       bg4: '#0096C7',
       bg5: '#0077B6',
-  
+
       //specialty colors
       modalBG: 'rgba(0,0,0,.425)',
       advancedBG: 'rgba(0,0,0,0.1)',
-  
+
       //primary colors
       primary1: '#48CAE4',
       primary2: '#3680E7',
       primary3: '#4D8FEA',
       primary4: '#376bad70',
       primary5: '#ADE8F4',
-  
+
       // color text
       primaryText1: '#03045E',
-  
+
       // secondary colors
       secondary1: '#2172E5',
       secondary2: '#17000b26',
       secondary3: '#17000b26',
-  
+
       // other
       red1: '#FF6871',
       red2: '#F82D3A',
       green1: '#27AE60',
       yellow1: '#FFE270',
       yellow2: '#F3841E'
-  
+
       // dont wanna forget these blue yet
       // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
       // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
@@ -145,7 +143,7 @@ export function colors(darkTheme:boolean): Colors {
 
 export function theme(): DefaultTheme {
   return {
-    ...colors(false),
+    ...colors(isDarkTheme),
 
     grids: {
       sm: 8,
@@ -179,7 +177,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   return <StyledComponentsThemeProvider theme={themeObject}>{children}</StyledComponentsThemeProvider>
 }
 
-const TextWrapper = styled(Text)<{ color: keyof Colors }>`
+const TextWrapper = styled(Text) <{ color: keyof Colors }>`
   color: ${({ color, theme }) => (theme as any)[color]};
 `
 
