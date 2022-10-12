@@ -10,7 +10,6 @@ import styled, {
 //import { useIsDarkMode } from '../state/user/hooks'
 import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
-import BackgroundImage from '../assets/images/background-min.png'
 
 export * from './components'
 
@@ -36,61 +35,117 @@ const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } 
 const white = '#FFFFFF'
 const black = '#000000'
 
-export function colors(): Colors {
-  return {
-    // base
-    white,
-    black,
-
-    // text
-    text1: '#FFFFFF',
-    text2: '#C3C5CB',
-    text3: '#6C7284',
-    text4: '#565A69',
-    text5: '#2C2F36',
-
-    // backgrounds / greys
-    bg1: '#212429',
-    bg2: '#2C2F36',
-    bg3: '#40444F',
-    bg4: '#565A69',
-    bg5: '#6C7284',
-
-    //specialty colors
-    modalBG: 'rgba(0,0,0,.425)',
-    advancedBG: 'rgba(0,0,0,0.1)',
-
-    //primary colors
-    primary1: '#2172E5',
-    primary2: '#3680E7',
-    primary3: '#4D8FEA',
-    primary4: '#376bad70',
-    primary5: '#153d6f70',
-
-    // color text
-    primaryText1: '#6da8ff',
-
-    // secondary colors
-    secondary1: '#2172E5',
-    secondary2: '#17000b26',
-    secondary3: '#17000b26',
-
-    // other
-    red1: '#FF6871',
-    red2: '#F82D3A',
-    green1: '#27AE60',
-    yellow1: '#FFE270',
-    yellow2: '#F3841E'
-
-    // dont wanna forget these blue yet
-    // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
-    // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
+export function colors(darkTheme:boolean): Colors {
+  if(darkTheme)
+  {
+    return {
+      // base
+      white,
+      black,
+  
+      // text
+      text1: '#FFFFFF',
+      text2: '#C3C5CB',
+      text3: '#6C7284',
+      text4: '#565A69',
+      text5: '#2C2F36',
+  
+      // backgrounds / greys
+      mainBg: "#CAF0F8",
+      bg1: '#212429',
+      bg2: '#2C2F36',
+      bg3: '#40444F',
+      bg4: '#565A69',
+      bg5: '#6C7284',
+  
+      //specialty colors
+      modalBG: 'rgba(0,0,0,.425)',
+      advancedBG: 'rgba(0,0,0,0.1)',
+  
+      //primary colors
+      primary1: '#2172E5',
+      primary2: '#3680E7',
+      primary3: '#4D8FEA',
+      primary4: '#376bad70',
+      primary5: '#153d6f70',
+  
+      // color text
+      primaryText1: '#6da8ff',
+  
+      // secondary colors
+      secondary1: '#2172E5',
+      secondary2: '#17000b26',
+      secondary3: '#17000b26',
+  
+      // other
+      red1: '#FF6871',
+      red2: '#F82D3A',
+      green1: '#27AE60',
+      yellow1: '#FFE270',
+      yellow2: '#F3841E'
+  
+      // dont wanna forget these blue yet
+      // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
+      // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
+    }
+  } else
+  {
+    return {
+      // base
+      white,
+      black,
+  
+      // text
+      text1: '#03045E',
+      text2: '#03045E',
+      text3: '#03045E',
+      text4: '#03045E',
+      text5: '#03045E',
+  
+      // backgrounds / greys
+      mainBg: "#CAF0F8",
+      bg1: '#90E0EF',
+      bg2: '#48CAE4',
+      bg3: '#00B4D8',
+      bg4: '#0096C7',
+      bg5: '#0077B6',
+  
+      //specialty colors
+      modalBG: 'rgba(0,0,0,.425)',
+      advancedBG: 'rgba(0,0,0,0.1)',
+  
+      //primary colors
+      primary1: '#48CAE4',
+      primary2: '#3680E7',
+      primary3: '#4D8FEA',
+      primary4: '#376bad70',
+      primary5: '#ADE8F4',
+  
+      // color text
+      primaryText1: '#03045E',
+  
+      // secondary colors
+      secondary1: '#2172E5',
+      secondary2: '#17000b26',
+      secondary3: '#17000b26',
+  
+      // other
+      red1: '#FF6871',
+      red2: '#F82D3A',
+      green1: '#27AE60',
+      yellow1: '#FFE270',
+      yellow2: '#F3841E'
+  
+      // dont wanna forget these blue yet
+      // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
+      // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
+    }
   }
 }
 
 export function theme(): DefaultTheme {
   return {
-    ...colors(),
+    ...colors(false),
 
     grids: {
       sm: 8,
@@ -208,7 +263,7 @@ html {
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
   color: ${({ theme }) => theme.text1};
-  background: url(${BackgroundImage})
+  background-color: ${({ theme }) => theme.mainBg};
 }
 
 
