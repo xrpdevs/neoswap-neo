@@ -47,13 +47,13 @@ export function colors(darkTheme: boolean): Colors {
       text1: '#CAF0F8',
       text2: '#CAF0F8',
       text3: '#CAF0F8',
-      text4: '#CAF0F8',
+      text4: '#03152b',
       text5: '#CAF0F8',
 
       // backgrounds / greys
       mainBg: "#01022e",
       bg1: '#042045',
-      bg2: '#0096C7',
+      bg2: '#03152b',
       bg3: '#03152b',
       bg4: '#023E8A',
       bg5: '#0077B6',
@@ -98,7 +98,7 @@ export function colors(darkTheme: boolean): Colors {
       text1: '#03045E',
       text2: '#03045E',
       text3: '#03045E',
-      text4: '#03045E',
+      text4: '#00B4D8',
       text5: '#03045E',
 
       // backgrounds / greys
@@ -114,14 +114,14 @@ export function colors(darkTheme: boolean): Colors {
       advancedBG: 'rgba(0,0,0,0.1)',
 
       //primary colors
-      primary1: '#48CAE4',
+      primary1: '#00B4D8',
       primary2: '#3680E7',
       primary3: '#4D8FEA',
       primary4: '#376bad70',
       primary5: '#ADE8F4',
 
       // color text
-      primaryText1: '#03045E',
+      primaryText1: '#00B4D8',
 
       // secondary colors
       secondary1: '#2172E5',

@@ -5,7 +5,7 @@ import { usePopper } from 'react-popper'
 import { useDispatch, useSelector } from 'react-redux'
 import { Text } from 'rebass'
 import styled from 'styled-components'
-import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
+// import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
 import { useFetchListCallback } from '../../hooks/useFetchListCallback'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +18,7 @@ import { CloseIcon, ExternalLink, LinkStyledButton, TYPE } from '../../theme'
 import listVersionLabel from '../../utils/listVersionLabel'
 import { parseENSAddress } from '../../utils/parseENSAddress'
 import uriToHttp from '../../utils/uriToHttp'
-import { ButtonOutlined, ButtonPrimary, ButtonSecondary } from '../Button'
+import {ButtonPrimary, ButtonSecondary } from '../Button'
 
 import Column from '../Column'
 import ListLogo from '../ListLogo'
@@ -102,7 +102,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
 
   const [open, toggle] = useToggle(false)
   const node = useRef<HTMLDivElement>()
-  const [referenceElement, setReferenceElement] = useState<HTMLDivElement>()
+  const [referenceElement] = useState<HTMLDivElement>()
   const [popperElement, setPopperElement] = useState<HTMLDivElement>()
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -181,7 +181,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
         </Row>
       </Column>
       <StyledMenu ref={node as any}>
-        <ButtonOutlined
+        {/* <ButtonOutlined
           style={{
             width: '2rem',
             padding: '.8rem .35rem',
@@ -193,7 +193,7 @@ const ListRow = memo(function ListRow({ listUrl, onBack }: { listUrl: string; on
           ref={setReferenceElement}
         >
           <DropDown />
-        </ButtonOutlined>
+        </ButtonOutlined> */}
 
         {open && (
           <PopoverContainer show={true} ref={setPopperElement as any} style={styles.popper} {...attributes.popper}>
