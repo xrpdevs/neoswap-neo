@@ -49,7 +49,7 @@ export function colors(darkTheme: boolean): Colors {
       text3: '#CAF0F8',
       text4: '#03152b',
       text5: '#CAF0F8',
-
+      textSpecial: '#cda7f2',
       // backgrounds / greys
       mainBg: "#01022e",
       bg1: '#042045',
@@ -100,6 +100,7 @@ export function colors(darkTheme: boolean): Colors {
       text3: '#03045E',
       text4: '#00B4D8',
       text5: '#03045E',
+      textSpecial: '#3a044f',
 
       // backgrounds / greys
       mainBg: "#CAF0F8",
@@ -264,7 +265,6 @@ html {
   color: ${({ theme }) => theme.text1};
   background-color: ${({ theme }) => theme.mainBg};
 }
-
 
 `
 /* 
