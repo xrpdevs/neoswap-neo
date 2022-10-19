@@ -7,8 +7,8 @@ import {
   useExpertModeManager,
   useUserDeadline,
 } from '../../state/user/hooks'
-//useDarkModeManager
 import TransactionSettings from '../TransactionSettings'
+import { useDarkModeManager } from '../../state/user/hooks'
 import { RowFixed, RowBetween } from '../Row'
 import { TYPE } from '../../theme'
 import QuestionHelper from '../QuestionHelper'
@@ -135,7 +135,7 @@ export default function SettingsTab() {
 
   const [expertMode, toggleExpertMode] = useExpertModeManager()
 
-  //const [darkMode, toggleDarkMode] = useDarkModeManager()
+  const [darkMode, toggleDarkMode] = useDarkModeManager()
 
   // show confirmation view before turning on
   const [showConfirmation, setShowConfirmation] = useState(false)
@@ -209,6 +209,14 @@ export default function SettingsTab() {
             <RowBetween>
               <RowFixed>
                 <TYPE.black fontWeight={400} fontSize={14} color={theme.text2}>
+                  {t('toggleDarkMode')}
+                </TYPE.black>
+              </RowFixed>
+              <Toggle isActive={darkMode} toggle={toggleDarkMode} />
+            </RowBetween>
+            <RowBetween>
+              <RowFixed>
+                <TYPE.black fontWeight={400} fontSize={14} color={theme.text2}>
                 {t('toggleExpertMode')}
                 </TYPE.black>
                 <QuestionHelper text="Bypasses confirmation modals and allows high slippage trades. Use at your own risk." />
@@ -237,13 +245,13 @@ export default function SettingsTab() {
   )
 }
 
-/*
-<RowBetween>
+
+{/* <RowBetween>
               <RowFixed>
                 <TYPE.black fontWeight={400} fontSize={14} color={theme.text2}>
                   {t('toggleDarkMode')}
                 </TYPE.black>
               </RowFixed>
               <Toggle isActive={darkMode} toggle={toggleDarkMode} />
-            </RowBetween>
-  */
+            </RowBetween> */}
+  

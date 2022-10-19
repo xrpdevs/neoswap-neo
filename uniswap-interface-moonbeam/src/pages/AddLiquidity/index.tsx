@@ -725,9 +725,9 @@ export default function AddLiquidity({
         </LightCard>
       </AutoColumn>
     ) : (
-      <AutoColumn gap="20px">
-        <RowFlat style={{ marginTop: '20px' }}>
-          <Text fontSize="48px" fontWeight={500} lineHeight="42px" marginRight={10}>
+      <AutoColumn gap="15px">
+        <RowFlat style={{ marginTop: '5px' }}>
+          <Text fontSize="25px" fontWeight={500} lineHeight="42px" marginRight={10}>
             {liquidityMinted?.toSignificant(6)}
           </Text>
           <DoubleCurrencyLogo
@@ -737,7 +737,7 @@ export default function AddLiquidity({
           />
         </RowFlat>
         <Row>
-          <Text fontSize="24px">
+          <Text fontSize="18px">
             {displayNames[0] + '/' + displayNames[1] + ' Pool Tokens'}
           </Text>
         </Row>

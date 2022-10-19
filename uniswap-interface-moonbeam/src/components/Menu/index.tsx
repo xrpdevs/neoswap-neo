@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Code, MessageCircle, Home } from 'react-feather'
+import { MessageCircle, Home, Moon, Airplay } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
@@ -50,7 +50,7 @@ const StyledMenu = styled.div`
 `
 
 const MenuFlyout = styled.span`
-  min-width: 8.125rem;
+  min-width: 10.125rem;
   background-color: ${({ theme }) => theme.bg3};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
     0px 24px 32px rgba(0, 0, 0, 0.01);
@@ -93,18 +93,23 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://moonbeam.network/">
+          <MenuItem id="link" href="https://canarypunks.xyz/">
             <Home size={14} />
             {t('Website')}
           </MenuItem>
-          <MenuItem id="link" href="https://discord.gg/PfpUATX">
+          <MenuItem id="link" href="https://stake.canarypunks.xyz/">
+            <Moon size={14} />
+            {t('NFT staking')}
+          </MenuItem>
+          <MenuItem id="link" href="https://discord.com/invite/8cdPB9M3e8">
             <MessageCircle size={14} />
             {t('discord')}
           </MenuItem>
-          <MenuItem id="link" href="https://github.com/PureStake/moonbeam">
-            <Code size={14} />
-            {t('code')}
+          <MenuItem id="link" href="https://twitter.com/Canary_Punks">
+            <Airplay size={14} />
+            {t('twitter')}
           </MenuItem>
+
         </MenuFlyout>
       )}
     </StyledMenu>

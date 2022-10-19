@@ -7,12 +7,12 @@ import styled, {
   css,
   DefaultTheme
 } from 'styled-components'
-//import { useIsDarkMode } from '../state/user/hooks'
+import { useDarkModeManager } from '../state/user/hooks'
 import { Text, TextProps } from 'rebass'
 import { Colors } from './styled'
-import BackgroundImage from '../assets/images/background-min.png'
 
 export * from './components'
+
 
 const MEDIA_WIDTHS = {
   upToExtraSmall: 500,
@@ -23,7 +23,7 @@ const MEDIA_WIDTHS = {
 
 const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } = Object.keys(MEDIA_WIDTHS).reduce(
   (accumulator, size) => {
-    ;(accumulator as any)[size] = (a: any, b: any, c: any) => css`
+    ; (accumulator as any)[size] = (a: any, b: any, c: any) => css`
       @media (max-width: ${(MEDIA_WIDTHS as any)[size]}px) {
         ${css(a, b, c)}
       }
@@ -36,61 +36,116 @@ const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } 
 const white = '#FFFFFF'
 const black = '#000000'
 
-export function colors(): Colors {
-  return {
-    // base
-    white,
-    black,
+export function colors(darkTheme: boolean): Colors {
+  if (darkTheme) {
+    return {
+      // base
+      white,
+      black,
 
-    // text
-    text1: '#FFFFFF',
-    text2: '#C3C5CB',
-    text3: '#6C7284',
-    text4: '#565A69',
-    text5: '#2C2F36',
+      // text
+      text1: '#CAF0F8',
+      text2: '#CAF0F8',
+      text3: '#CAF0F8',
+      text4: '#03152b',
+      text5: '#CAF0F8',
+      textSpecial: '#cda7f2',
+      // backgrounds / greys
+      mainBg: "#01022e",
+      bg1: '#042045',
+      bg2: '#03152b',
+      bg3: '#03152b',
+      bg4: '#023E8A',
+      bg5: '#0077B6',
 
-    // backgrounds / greys
-    bg1: '#212429',
-    bg2: '#2C2F36',
-    bg3: '#40444F',
-    bg4: '#565A69',
-    bg5: '#6C7284',
+      //specialty colors
+      modalBG: 'rgba(0,0,0,.425)',
+      advancedBG: 'rgba(0,0,0,0.1)',
 
-    //specialty colors
-    modalBG: 'rgba(0,0,0,.425)',
-    advancedBG: 'rgba(0,0,0,0.1)',
+      //primary colors
+      primary1: '#03152b',
+      primary2: '#03152b',
+      primary3: '#023E8A',
+      primary4: '#376bad70',
+      primary5: '#03152b',
 
-    //primary colors
-    primary1: '#2172E5',
-    primary2: '#3680E7',
-    primary3: '#4D8FEA',
-    primary4: '#376bad70',
-    primary5: '#153d6f70',
+      // color text
+      primaryText1: '#48CAE4',
 
-    // color text
-    primaryText1: '#6da8ff',
+      // secondary colors
+      secondary1: '#2172E5',
+      secondary2: '#17000b26',
+      secondary3: '#17000b26',
 
-    // secondary colors
-    secondary1: '#2172E5',
-    secondary2: '#17000b26',
-    secondary3: '#17000b26',
+      // other
+      red1: '#FF6871',
+      red2: '#F82D3A',
+      green1: '#27AE60',
+      yellow1: '#FFE270',
+      yellow2: '#F3841E'
 
-    // other
-    red1: '#FF6871',
-    red2: '#F82D3A',
-    green1: '#27AE60',
-    yellow1: '#FFE270',
-    yellow2: '#F3841E'
+      // dont wanna forget these blue yet
+      // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
+      // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
+    }
+  } else {
+    return {
+      // base
+      white,
+      black,
 
-    // dont wanna forget these blue yet
-    // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
-    // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
+      // text
+      text1: '#03045E',
+      text2: '#03045E',
+      text3: '#03045E',
+      text4: '#00B4D8',
+      text5: '#03045E',
+      textSpecial: '#3a044f',
+
+      // backgrounds / greys
+      mainBg: "#CAF0F8",
+      bg1: '#90E0EF',
+      bg2: '#48CAE4',
+      bg3: '#00B4D8',
+      bg4: '#0096C7',
+      bg5: '#0077B6',
+
+      //specialty colors
+      modalBG: 'rgba(0,0,0,.425)',
+      advancedBG: 'rgba(0,0,0,0.1)',
+
+      //primary colors
+      primary1: '#00B4D8',
+      primary2: '#3680E7',
+      primary3: '#4D8FEA',
+      primary4: '#376bad70',
+      primary5: '#ADE8F4',
+
+      // color text
+      primaryText1: '#00B4D8',
+
+      // secondary colors
+      secondary1: '#2172E5',
+      secondary2: '#17000b26',
+      secondary3: '#17000b26',
+
+      // other
+      red1: '#FF6871',
+      red2: '#F82D3A',
+      green1: '#27AE60',
+      yellow1: '#FFE270',
+      yellow2: '#F3841E'
+
+      // dont wanna forget these blue yet
+      // blue4: darkMode ? '#153d6f70' : '#C4D9F8',
+      // blue5: darkMode ? '#153d6f70' : '#EBF4FF',
+    }
   }
 }
 
-export function theme(): DefaultTheme {
+export function theme(isDark:boolean): DefaultTheme {
   return {
-    ...colors(),
+    ...colors(isDark),
 
     grids: {
       sm: 8,
@@ -117,14 +172,14 @@ export function theme(): DefaultTheme {
 }
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  //const darkMode = useIsDarkMode()
+  const [isDark] = useDarkModeManager()
 
-  const themeObject = theme()
+  const themeObject = theme(isDark)
 
   return <StyledComponentsThemeProvider theme={themeObject}>{children}</StyledComponentsThemeProvider>
 }
 
-const TextWrapper = styled(Text)<{ color: keyof Colors }>`
+const TextWrapper = styled(Text) <{ color: keyof Colors }>`
   color: ${({ color, theme }) => (theme as any)[color]};
 `
 
@@ -208,9 +263,8 @@ html {
 export const ThemedGlobalStyle = createGlobalStyle`
 html {
   color: ${({ theme }) => theme.text1};
-  background: url(${BackgroundImage})
+  background-color: ${({ theme }) => theme.mainBg};
 }
-
 
 `
 /* 
