@@ -16,6 +16,7 @@ import { MouseoverTooltip } from '../Tooltip'
 import { FadedSpan, MenuItem } from './styleds'
 import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
+import { CHAINID_NATIVETOKENS } from '../../constants/index'
 
 function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : currency === DEV ? 'DEV' : ''
@@ -115,7 +116,7 @@ function CurrencyRow({
       <CurrencyLogo currency={currency} size={'24px'} />
       <Column>
         <Text title={currency.name} fontWeight={500}>
-          {currency.symbol}
+          {currency === DEV ? (chainId ? CHAINID_NATIVETOKENS[chainId] : null) : currency.symbol}
         </Text>
         <FadedSpan>
           {!isOnSelectedList && customAdded ? (

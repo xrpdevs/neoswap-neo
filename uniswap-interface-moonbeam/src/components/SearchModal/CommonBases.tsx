@@ -8,6 +8,7 @@ import { AutoColumn } from '../Column'
 import QuestionHelper from '../QuestionHelper'
 import { AutoRow } from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
+import { CHAINID_NATIVETOKENS } from '../../constants/index'
 
 const BaseWrapper = styled.div<{ disable?: boolean }>`
   border: 1px solid ${({ theme, disable }) => (disable ? 'transparent' : theme.bg3)};
@@ -53,7 +54,7 @@ export default function CommonBases({
         >
           <CurrencyLogo currency={DEV} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>
-            DEV
+            {chainId ? CHAINID_NATIVETOKENS[chainId] : null}
           </Text>
         </BaseWrapper>
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {

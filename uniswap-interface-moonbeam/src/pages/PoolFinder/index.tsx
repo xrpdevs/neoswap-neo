@@ -27,6 +27,9 @@ enum Fields {
 export default function PoolFinder() {
   const { account } = useActiveWeb3React()
 
+  let c0name: string | undefined = ''
+  let c1name: string | undefined = ''
+
   const [showSearch, setShowSearch] = useState<boolean>(false)
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
 
@@ -76,6 +79,24 @@ export default function PoolFinder() {
     </LightCard>
   )
 
+  if (currency0) {
+    if (currency0 === DEV) {
+      c0name = 'SGB'
+    } else {
+      c0name = currency0.symbol
+    }
+  } else c0name = ''
+
+  if (currency1) {
+    if (currency1 === DEV) {
+      c1name = 'SGB'
+    } else {
+      c1name = currency1.symbol
+    }
+  } else c1name = ''
+
+  console.log("data", { currency0, currency1, c0name, c1name})
+
   return (
     <AppBody>
       <FindPoolTabs />
@@ -90,7 +111,7 @@ export default function PoolFinder() {
             <Row>
               <CurrencyLogo currency={currency0} />
               <Text fontWeight={500} fontSize={20} marginLeft={'12px'}>
-                {currency0.symbol}
+                {c0name}
               </Text>
             </Row>
           ) : (
@@ -114,7 +135,7 @@ export default function PoolFinder() {
             <Row>
               <CurrencyLogo currency={currency1} />
               <Text fontWeight={500} fontSize={20} marginLeft={'12px'}>
-                {currency1.symbol}
+                {c1name}
               </Text>
             </Row>
           ) : (

@@ -1,4 +1,4 @@
-import { Currency, Pair } from 'neoswap-sdk'
+import { Currency, DEV, Pair } from 'neoswap-sdk'
 import React, { useState, useContext, useCallback } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { darken } from 'polished'
@@ -13,6 +13,8 @@ import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
 
 import { useActiveWeb3React } from '../../hooks'
 import { useTranslation } from 'react-i18next'
+
+import { CHAINID_NATIVETOKENS } from '../../constants/index'
 
 const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -149,6 +151,15 @@ export default function CurrencyInputPanel({
 }: CurrencyInputPanelProps) {
   const { t } = useTranslation()
 
+  const chainId = useActiveWeb3React().chainId
+
+  let c0name: string | undefined = ''
+  let c1name: string | undefined = ''
+  let c0symb: string | undefined = ''
+//  let c1symb: string | undefined = ''
+
+  console.log(currency, otherCurrency)
+
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
 
@@ -159,6 +170,28 @@ export default function CurrencyInputPanel({
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
   }, [setModalOpen])
+
+  if (currency) {
+    if (currency === DEV) {
+      c0name = chainId ? CHAINID_NATIVETOKENS[chainId] : ''
+    } else {
+      c0name = currency.symbol
+    }
+  } else c0name = ''
+
+  c0symb = c0name
+
+  if (otherCurrency) {
+    if (otherCurrency === DEV) {
+      c1name = chainId ? CHAINID_NATIVETOKENS[chainId] : ''
+    } else {
+      c1name = otherCurrency.symbol
+    }
+  } else c1name = ''
+
+ /// c1symb = c1name
+
+  console.log('data2', { pair, c0name, c1name })
 
   return (
     <InputPanel id={id}>
@@ -217,15 +250,15 @@ export default function CurrencyInputPanel({
               ) : null}
               {pair ? (
                 <StyledTokenName className="pair-name-container">
-                  {pair?.token0.symbol}:{pair?.token1.symbol}
+                  {c0name}:{c1name}
                 </StyledTokenName>
               ) : (
                 <StyledTokenName className="token-symbol-container" active={Boolean(currency && currency.symbol)}>
-                  {(currency && currency.symbol && currency.symbol.length > 20
-                    ? currency.symbol.slice(0, 4) +
+                  {(currency && c0symb && c0symb.length > 20
+                    ? c0symb.slice(0, 4) +
                       '...' +
-                      currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
-                    : currency?.symbol) || t('selectToken')}
+                      c0symb.slice(c0symb.length - 5, c0symb.length)
+                    : c0symb) || t('selectToken')}
                 </StyledTokenName>
               )}
               {!disableCurrencySelect && <StyledDropDown selected={!!currency} />}

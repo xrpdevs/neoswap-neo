@@ -14,6 +14,12 @@ export const ROUTER_ADDRESS: { [key: string]: string } = {
   [ChainId.SONGBIRD]: routerv2
 }
 
+export const CHAINID_NATIVETOKENS: { [key: string]: string } = {
+  [ChainId.SONGBIRD]: 'SGB',
+  [ChainId.FLARE]: 'FLR',
+  [ChainId.COSTON]: 'CFLR'
+}
+
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
