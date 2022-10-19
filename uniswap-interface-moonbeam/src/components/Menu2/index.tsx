@@ -109,7 +109,7 @@ export default function Menu2() {
       {open && (
         <MenuFlyout>
           {/*<MenuItem id="link" href="https://moonbeam.network/">*/}
-          <MenuNavItem onClick={toggle} id={`pool-nav-link`} to={'/pool'}>
+          <MenuNavItem onClick={toggle} id={`pool-nav-link`} to={'/poolinformation'}>
             <Home size={14} /> {t('Admin Stuff')}
           </MenuNavItem>
           {/*          </MenuItem>*/}
