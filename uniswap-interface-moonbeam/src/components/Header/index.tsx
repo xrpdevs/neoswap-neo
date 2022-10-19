@@ -13,7 +13,7 @@ import { useETHBalances } from '../../state/wallet/hooks'
 import { YellowCard } from '../Card'
 import Settings from '../Settings'
 import Menu from '../Menu'
-
+import Menu2 from '../Menu2'
 import { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
 // import VersionSwitch from './VersionSwitch'
@@ -157,6 +157,7 @@ export default function Header() {
             {/* <VersionSwitch /> */}
             <Settings />
             <Menu />
+            <Menu2 />
           </HeaderElementWrap>
         </HeaderControls>
       </RowBetween>
