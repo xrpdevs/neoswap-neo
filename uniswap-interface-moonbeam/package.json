@@ -57,6 +57,7 @@
     "prettier": "^1.17.0",
     "qs": "^6.9.4",
     "react": "^16.13.1",
+    "react-chartjs-2": "^4.3.1",
     "react-device-detect": "^1.6.2",
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
@@ -106,7 +107,13 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "chart.js": "^3.9.1",
+    "chartjs-adapter-date-fns": "^2.0.0",
+    "chartjs-adapter-moment": "^1.0.0",
+    "date-fns": "^2.29.3",
+    "is-buffer": "^2.0.5",
     "neoswap-sdk": "^1.0.5",
+    "node-fetch": "^3.2.10",
     "tsc": "^2.0.4"
   },
   "version": "1.0.0",

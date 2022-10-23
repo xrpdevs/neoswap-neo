@@ -8,13 +8,13 @@ import { useTranslation } from 'react-i18next'
 
 import { ExternalLink } from '../../theme'
 
-const StyledMenuIcon = styled(MenuIcon)`
+export const StyledMenuIcon = styled(MenuIcon)`
   path {
     stroke: ${({ theme }) => theme.text1};
   }
 `
 
-const StyledMenuButton = styled.button`
+export const StyledMenuButton = styled.button`
   width: 100%;
   height: 100%;
   border: none;
@@ -65,7 +65,7 @@ const MenuFlyout = styled.span`
   z-index: 100;
 `
 
-const MenuItem = styled(ExternalLink)`
+export const MenuItem = styled(ExternalLink)`
   flex: 1;
   padding: 0.5rem 0.5rem;
   color: ${({ theme }) => theme.text2};

@@ -230,6 +230,29 @@ const ButtonConfirmedStyle = styled(Base)`
   }
 `
 
+export const ButtonChart = styled(Base)`
+  border: 1px solid ${({ theme }) => theme.bg2};
+  background-color: transparent;
+  color: ${({ theme }) => theme.text1};
+
+  &:focus {
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.bg4};
+  }
+  &:hover {
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.bg4};
+  }
+  &:active {
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.bg4};
+  }
+  &:disabled {
+    opacity: 50%;
+    cursor: auto;
+  }
+  width: 23%;
+  margin-bottom: 4px;
+  padding: 4px;
+`
+
 const ButtonErrorStyle = styled(Base)`
   background-color: ${({ theme }) => theme.red1};
   border: 1px solid ${({ theme }) => theme.red1};

@@ -1,12 +1,13 @@
-import { CurrencyAmount, JSBI, Token, Trade } from 'neoswap-sdk'
+import { CurrencyAmount, JSBI, Token, Trade, WETH } from 'neoswap-sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
 import { Text } from 'rebass'
 import { useTranslation } from 'react-i18next'
 import { ThemeContext } from 'styled-components'
 import AddressInputPanel from '../../components/AddressInputPanel'
-import { ButtonError, ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
+import { ButtonError, ButtonChart, ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
 import Card, { GreyCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
@@ -19,7 +20,7 @@ import { ArrowWrapper, BottomGrouping, SwapCallbackError, Wrapper } from '../../
 import TradePrice from '../../components/swap/TradePrice'
 import TokenWarningModal from '../../components/TokenWarningModal'
 import ProgressSteps from '../../components/ProgressSteps'
-
+//import { StyledMenuIcon } from '../../components/Menu/index'
 import { INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
@@ -43,10 +44,15 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
 import { ClickableText } from '../Pool/styleds'
 import Loader from '../../components/Loader'
+import { useHistory } from 'react-router-dom'
 
 export default function Swap() {
   const { t } = useTranslation()
   const loadedUrlParams = useDefaultsFromURLSearch()
+
+  const cid = useActiveWeb3React().chainId
+
+  const history = useHistory()
 
   // token warning stuff
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -84,6 +90,37 @@ export default function Swap() {
     currencies[Field.OUTPUT],
     typedValue
   )
+
+
+
+  const loadChart = () => {
+    if (currencies.OUTPUT && currencies.INPUT && cid) {
+      let addrOut
+      let addrIn
+
+      const cur: any = currencies
+
+      if (!cur.OUTPUT.hasOwnProperty('address')) {
+        addrOut = WETH[cid].address
+      } else {
+        addrOut = cur.OUTPUT.address
+      }
+
+      if (!cur.INPUT.hasOwnProperty('address')) {
+        addrIn = WETH[cid].address
+      } else {
+        addrIn = cur.INPUT.address
+      }
+
+      history.push({
+        pathname: '/chart',
+        state: { fuckoff: [addrIn, addrOut] }
+      })
+    } else {
+      alert('Select two coins first!')
+    }
+  }
+
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const { address: recipientAddress } = useENSAddress(recipient)
   const toggledVersion = useToggledVersion()
@@ -251,6 +288,10 @@ export default function Swap() {
     onCurrencySelection
   ])
 
+  useEffect(() => {
+    console.log('hi')
+  }, [Field.INPUT, Field.OUTPUT])
+
   return (
     <>
       <TokenWarningModal
@@ -274,7 +315,13 @@ export default function Swap() {
             swapErrorMessage={swapErrorMessage}
             onDismiss={handleConfirmDismiss}
           />
-
+          <ButtonChart
+            onClick={() => {
+              loadChart()
+            }}
+          >
+            {'Chart'}
+          </ButtonChart>
           <AutoColumn gap={'md'}>
             <CurrencyInputPanel
               label={independentField === Field.OUTPUT && !showWrap && trade ? 'From (estimated)' : 'From'}

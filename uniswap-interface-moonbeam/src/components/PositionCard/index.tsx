@@ -7,6 +7,8 @@ import { Text } from 'rebass'
 import styled from 'styled-components'
 import { useTotalSupply } from '../../data/TotalSupply'
 
+import { CHAINID_NATIVETOKENS } from '../../constants/index'
+
 import { useActiveWeb3React } from '../../hooks'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { ExternalLink } from '../../theme'
@@ -49,6 +51,8 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
 
+  const _chainId: null | undefined | string | any = useActiveWeb3React().chainId
+
   const [token0Deposited, token1Deposited] =
     !!pair &&
     !!totalPoolTokens &&
@@ -77,7 +81,8 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               <RowFixed>
                 <DoubleCurrencyLogo currency0={currency0} currency1={currency1} margin={true} size={20} />
                 <Text fontWeight={500} fontSize={20}>
-                  {currency0.symbol}/{currency1.symbol}
+                  {currency0.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency0.symbol}/
+                  {currency1.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency1.symbol}
                 </Text>
               </RowFixed>
               <RowFixed>
@@ -89,11 +94,11 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
             <AutoColumn gap="4px">
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  {currency0.symbol}:
+                  {currency0.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency0.symbol}:
                 </Text>
                 {token0Deposited ? (
                   <RowFixed>
-                    <Text  fontSize={16} fontWeight={500} marginLeft={'6px'}>
+                    <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
                       {token0Deposited?.toSignificant(6)}
                     </Text>
                   </RowFixed>
@@ -103,7 +108,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               </FixedHeightRow>
               <FixedHeightRow>
                 <Text fontSize={16} fontWeight={500}>
-                  {currency1.symbol}:
+                  {currency1.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency1.symbol}:
                 </Text>
                 {token1Deposited ? (
                   <RowFixed>
@@ -130,6 +135,8 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
   const currency1 = unwrappedToken(pair.token1)
 
   const [showMore, setShowMore] = useState(false)
+
+  const _chainId: null | undefined | string | any = useActiveWeb3React().chainId
 
   const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
@@ -158,7 +165,11 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
           <RowFixed>
             <DoubleCurrencyLogo currency0={currency0} currency1={currency1} margin={true} size={20} />
             <Text fontWeight={500} fontSize={20}>
-              {!currency0 || !currency1 ? <Dots>Loading</Dots> : `${currency0.symbol}/${currency1.symbol}`}
+              {!currency0 || !currency1 ? (
+                <Dots>Loading</Dots>
+              ) : (
+                `${currency0.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency0.symbol}/${currency1.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency1.symbol}`
+              )}
             </Text>
           </RowFixed>
           <RowFixed>
@@ -174,7 +185,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency0.symbol}:
+                  Pooled {currency0.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency0.symbol}:
                 </Text>
               </RowFixed>
               {token0Deposited ? (
@@ -192,7 +203,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency1.symbol}:
+                  Pooled {currency1.symbol === 'DEV' ? (_chainId ? CHAINID_NATIVETOKENS[_chainId] : null) : currency1.symbol}:
                 </Text>
               </RowFixed>
               {token1Deposited ? (
@@ -230,9 +241,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
               <ButtonSecondary as={Link} to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`} width="48%">
                 Add
               </ButtonSecondary>
-              <ButtonSecondary>
-                Claim SGB
-              </ButtonSecondary>
+              <ButtonSecondary>Claim SGB</ButtonSecondary>
               <ButtonSecondary as={Link} width="48%" to={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`}>
                 Remove
               </ButtonSecondary>

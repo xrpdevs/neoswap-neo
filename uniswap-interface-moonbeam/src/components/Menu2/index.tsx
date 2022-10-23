@@ -6,7 +6,7 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import useToggle from '../../hooks/useToggle'
 import { useTranslation } from 'react-i18next'
 import { NavLink /*, Link as HistoryLink*/ } from 'react-router-dom'
-import { ExternalLink } from '../../theme'
+//import { ExternalLink } from '../../theme'
 
 const StyledMenuIcon = styled(MenuIcon)`
   path {
@@ -65,7 +65,7 @@ const MenuFlyout = styled.span`
   z-index: 100;
 `
 
-const MenuItem = styled(ExternalLink)`
+/*const MenuItem = styled(ExternalLink)`
   flex: 1;
   padding: 0.5rem 0.5rem;
   color: ${({ theme }) => theme.text2};
@@ -77,7 +77,7 @@ const MenuItem = styled(ExternalLink)`
   > svg {
     margin-right: 8px;
   }
-`
+`*/
 
 const MenuNavItem = styled(NavLink)`
   flex: 1;
@@ -113,10 +113,10 @@ export default function Menu2() {
             <Home size={14} /> {t('Admin Stuff')}
           </MenuNavItem>
           {/*          </MenuItem>*/}
-          <MenuItem id="link" href="https://discord.gg/PfpUATX">
+          <MenuNavItem onClick={toggle} id={`pool-nav-link`} to={'/chart'}>
             <MessageCircle size={14} />
-            {t('Pool Details')}
-          </MenuItem>
+            {'Charts'}
+          </MenuNavItem>
         </MenuFlyout>
       )}
     </StyledMenu>
